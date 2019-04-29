@@ -1,0 +1,2 @@
+class Blame < ApplicationRecord
+end
