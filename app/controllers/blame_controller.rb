@@ -1,4 +1,4 @@
-class BlameController < < ApiController
+class BlameController < ApiController
 
 	def index
    	@blames = Blame.all
