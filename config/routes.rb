@@ -1,17 +1,8 @@
-Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
-  
+Rails.application.routes.draw do  
   scope '/api' do
-	  get  '/users',  to: 'user#index'
-	  get  '/blames',  to: 'blame#index'
-	  get  '/teams',  to: 'team#index'
+
+	  get '/teams/megacorp',  to: 'teams#show'
+	  post '/blames', to: 'blames#create'
 
 	end
-
-
-
-
-
-
 end

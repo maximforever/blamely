@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
 
 import Blamely from './components/Blamely'
+
+import './stylesheets/blamely.css';
 
 class App extends Component {
 

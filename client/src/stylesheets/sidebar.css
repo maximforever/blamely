@@ -1,0 +1,23 @@
+#sidebar {
+	display: flex;
+	flex-direction: column;
+
+    width: 200px;
+	min-width: 200px;
+
+    background: #48525b;
+    color: rgba(255, 255, 255, .75);
+    font-family: 'Open Sans', sans-serif;
+    
+    align-items: center;
+
+}
+
+#logo {
+    margin: 1.25em 0.9375em 0.9375em 0.9375em
+}
+
+#logo img {
+    width: 90%;
+    height: auto;
+}

@@ -1,29 +1,38 @@
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
-
-
 mega_corp = Team.create(name: "MegaCorp Ltd.")
 
 
 max = mega_corp.users.create(
 	username: "your_next_engineer",
 	name: "Max Pekarsky",
-	points: 100
+	total_points: 100
 )
 
-mega_corp.users.create(
+emily = mega_corp.users.create(
 	username: "em_codes",
 	name: "Emily Codecraft",
-	points: 100
+	total_points: 100
 )
 
-mega_corp.users.create(
+jonas = mega_corp.users.create(
 	username: "steamroller",
 	name: "Jonas Railsetter",
-	points: 100
+	total_points: 100
 )
 
 max.blames.create(
-	recepient: "steamroller",
+	recipient_id: jonas.id,
 	points: 10,
 	message: "Tuna sandwich for lunch again? Ten points from Gryffindor!"
+)
+
+emily.blames.create(
+	recipient_id: jonas.id,
+	points: 10,
+	message: "Seriously with the tuna again??"
+)
+
+jonas.blames.create(
+	recipient_id: max.id,
+	points: 20,
+	message: "This is revenge for the tuna"
 )

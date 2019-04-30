@@ -1,0 +1,19 @@
+#add-blame-wrapper {
+	z-index: 2;
+}
+
+textarea {
+	overflow: hidden;
+    overflow-wrap: break-word;
+    resize: none;
+    height: 90px;
+
+    outline: none;
+    border: none;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.2rem;
+}

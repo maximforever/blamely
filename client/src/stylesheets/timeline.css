@@ -1,0 +1,40 @@
+#timeline-wrapper {
+	display: flex;
+	flex-direction: column;
+    flex-grow: 1;
+    min-height: 100vh;
+
+    background: #e8ebed;
+}
+
+#red-area {
+	background: #bb5050;
+	height: 250px;
+	width: 100%;
+	z-index: 1;
+	position: absolute;
+}
+
+#overlay-container {
+	padding: 20px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+#overlay-container h2 {
+	color: white;
+	font-weight: 300;
+}
+
+.card {
+	background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 3px 3px 1px rgba(45, 45, 45, 0.15);
+    padding: 20px;
+    margin-bottom: 20px;
+
+    width: 500px;
+}
+
