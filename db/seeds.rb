@@ -2,7 +2,7 @@ mega_corp = Team.create(name: "MegaCorp Ltd.")
 
 
 aaron = mega_corp.users.create(
-	username: "ur_neighborhood_dev",
+	username: "bonusly_developer",
 	name: "Aaron Davis",
 	points_to_give: 100,
 	points_to_redeem: 60
@@ -28,6 +28,12 @@ jonas = mega_corp.users.create(
 	name: "Jonas Railsetter",
 	points_to_give: 100,
 	points_to_redeem: 60
+)
+
+aaron.blames.create(
+	recipient_id: max.id,
+	points: 10,
+	message: "For terrible intonation at Jam Night"
 )
 
 max.blames.create(
