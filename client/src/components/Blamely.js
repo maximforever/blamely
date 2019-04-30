@@ -13,7 +13,7 @@ class Blamely extends Component {
       users: null,
       blames: null,
       team: null,
-      currentUser: "Max",
+      currentUser: null,
       currentBlame: ""
     };
 
@@ -26,6 +26,7 @@ class Blamely extends Component {
        
         console.log(json);
         this.setState({
+          currentUser: json.current_user,
           users: json.users,
           blames: json.blames
         });
@@ -38,7 +39,6 @@ class Blamely extends Component {
 
     const data = {
       blame: {
-        user_id: 1,
         recipient_id: 2,      // TODO: actually set this
         message: this.state.currentBlame,
         points: 10            // TODO: get points from typing/dropdown
@@ -57,23 +57,21 @@ class Blamely extends Component {
       }
     })
       .then(response => response.json())
-      .then((json) => {
+      .then((jsonResponse) => {
        
-        console.log(json);
+        console.log(jsonResponse);
 
         // add to state
 
-        let currentBlames = this.state.blames.slice();
-        currentBlames.unshift(json.blame);
-
         this.setState({
-          blames: currentBlames
+          blames: jsonResponse.blames,
+          currentUser: jsonResponse.user
         })
 
-
-
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error)
+      });
     
   }
 
@@ -96,6 +94,7 @@ class Blamely extends Component {
         <div id="blamely-wrapper">
           <Sidebar />
           <Timeline 
+            currentUser={this.state.currentUser}
             blames={this.state.blames}
             value={this.state.currentBlame}
             onClick={() => this.recordBlame}
