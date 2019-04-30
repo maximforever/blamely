@@ -10,7 +10,7 @@ const UsernameSelector = ({team}) => {
   return (
   		<select name="teammate" id="teammate-to-blame">
   		{ 
-  			team.map((teammate) => (<option key={teammate.id} value={teammate.username}>{teammate.username}</option>))
+  			team.map((teammate) => (<option key={teammate.id} value={teammate.id}>{teammate.username}</option>))
   		}
   		</select>
 	)

@@ -14,9 +14,9 @@ const AddBlame = ({currentBlame, handleClick, handleInput, team, error}) => {
             <UsernameSelector team={team} />
           <span>for</span>
 
-      		<select name="points" id="points-to-charge">
+      		<select name="points" id="points-to-charge" defaultValue="10">
     			  <option value="5">5</option>
-    			  <option value="10" selected>10</option>
+    			  <option value="10">10</option>
     			  <option value="15">15</option>
     			  <option value="20">20</option>
     			</select> 

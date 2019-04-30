@@ -52,11 +52,17 @@ class Blamely extends Component {
       return;
     }
 
+    // I know this is decidedly -not- a React-like way to get info from the dom
+    // I will refactor as a next step
+
+    let recipientId = document.getElementById("teammate-to-blame").value;
+    let pointCount = document.getElementById("points-to-charge").value;
+
     const data = {
       blame: {
-        recipient_id: 2,      // TODO: actually set this
+        recipient_id: recipientId,      
         message: this.state.currentBlame.trim(),
-        points: 10            // TODO: get points from typing/dropdown
+        points: pointCount           
       }
     }
 
