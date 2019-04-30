@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import Sidebar from './Sidebar'
 import Timeline from './Timeline'
+import Hint from './Hint'
+
 
 import '../stylesheets/blamely.css';
 
@@ -14,7 +16,13 @@ class Blamely extends Component {
       blames: null,
       team: null,
       currentUser: null,
-      currentBlame: ""
+      currentBlame: "",
+      error: null,
+      hint: {
+        display: false,
+        x: 0,
+        y: 0
+      }
     };
 
   }
@@ -37,17 +45,20 @@ class Blamely extends Component {
 
   recordBlame = () => {
 
+    if(this.state.currentBlame == null || !this.state.currentBlame.trim().length){
+      this.setState({
+        error: "Can't send in a blank message"
+      })
+      return;
+    }
+
     const data = {
       blame: {
         recipient_id: 2,      // TODO: actually set this
-        message: this.state.currentBlame,
+        message: this.state.currentBlame.trim(),
         points: 10            // TODO: get points from typing/dropdown
       }
     }
-
-
-
-    console.log(data);
 
     fetch('/api/blames', {
       method: "POST",
@@ -65,7 +76,8 @@ class Blamely extends Component {
 
         this.setState({
           blames: jsonResponse.blames,
-          currentUser: jsonResponse.user
+          currentUser: jsonResponse.user,
+          currentBlame: ""
         })
 
       })
@@ -77,12 +89,50 @@ class Blamely extends Component {
 
   updateBlame = (event) => {
 
-    const blame = event.target.value.trim();
+    const blame = event.target.value;
 
     this.setState({
-      currentBlame: blame
+      currentBlame: blame,
+      error: ""
     })
   }
+
+  displayHint = (event) => {
+
+    let newHintState = {
+      display: true,
+      x: event.clientX,
+      y: event.clientY
+    }
+
+    this.setState({
+      hint: newHintState
+    })
+
+    let self = this;
+
+    setTimeout(function(){
+        let newHintState = {
+          display: false,
+          x: 0,
+          y: 0
+        }
+
+        self.setState({
+          hint: newHintState
+        })
+    }, 1000)
+
+  }
+
+  renderHint = () => {
+
+    return (this.state.hint.display) ? <Hint xPos={this.state.hint.x} yPos={this.state.hint.y} /> : null;
+
+  }
+
+
+
 
   render() {
 
@@ -90,17 +140,26 @@ class Blamely extends Component {
       return null
     } else {
 
+      let hint = this.renderHint();
+
       return (
         <div id="blamely-wrapper">
-          <Sidebar />
+          <Sidebar displayHint={this.displayHint} />
           <Timeline 
             currentUser={this.state.currentUser}
             blames={this.state.blames}
             value={this.state.currentBlame}
             onClick={() => this.recordBlame}
             onType={this.updateBlame}
+            error={this.state.error}
+            displayHint={this.displayHint}
+            team={this.state.users}
           />
+          {hint}
         </div>
+        
+
+        
       )
     }
 

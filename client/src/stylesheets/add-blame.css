@@ -1,5 +1,6 @@
 #add-blame-wrapper {
 	z-index: 2;
+    padding: 20px;
 }
 
 textarea {
@@ -16,4 +17,26 @@ textarea {
 
     font-family: 'Open Sans', sans-serif;
     font-size: 1.2rem;
+}
+
+#add-blame-error{
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: white;
+    background: #2f4b84;
+    text-align: center;
+}
+
+#dropdown-wrapper {
+    padding: 0.3rem 0;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #48545B;
+}
+
+#dropdown-wrapper select, #teammate-to-blame {
+    margin: 0 0.3rem;
+    font-size: 1.1rem;
 }

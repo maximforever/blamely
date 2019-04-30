@@ -2,7 +2,7 @@ class TeamsController < ApiController
 
 	def show
 
-		team_blames = current_team.blames.order(created_at: :asc)
+		team_blames = current_blames
 
 		render json: {
 			blames: team_blames,

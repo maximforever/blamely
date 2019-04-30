@@ -30,7 +30,8 @@ ActiveRecord::Schema.define(version: 2019_04_29_173522) do
   create_table "users", force: :cascade do |t|
     t.integer "team_id", null: false
     t.string "username", null: false
-    t.integer "total_points", null: false
+    t.integer "points_to_give", null: false
+    t.integer "points_to_redeem", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

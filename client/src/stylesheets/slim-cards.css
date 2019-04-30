@@ -1,0 +1,20 @@
+
+.slim-card {
+    color: #48545B;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 1.6;
+}
+
+.payment-hint button {
+    margin: auto;
+    width: 100%;
+}
+
+.text {
+	text-align: left;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}

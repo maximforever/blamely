@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
 
 #blamely-wrapper {
     display: flex;
@@ -19,9 +19,47 @@ button {
     font-family: 'Open Sans', sans-serif;
     border: 1px solid #963939;
     font-size: 1.3rem;
+
+    outline: none;
+}
+
+button.secondary-button {
+    background: none;
+    color: #bb5050;
+    border: 1px solid #bb5050;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 1.1rem;
 }
 
 button:hover {
     background: #a23333;
     cursor: pointer;
+}
+
+button.secondary-button:hover {
+    background: rgba(226, 71, 100, 0.1);
+    color: #a23333;
+    border: 1px solid #a23333;;
+}
+
+a {
+    text-decoration: none;
+    color: #bb5050;
+}
+
+a:hover {
+    color: #a23333;
+    text-decoration: underline;
+}
+
+.hint {
+    position: absolute;
+    background: rgba(45, 45, 45, 0.8);
+    color: white;
+    font-size: 0.85rem;
+    line-height: 1.6rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    z-index: 10;
 }
