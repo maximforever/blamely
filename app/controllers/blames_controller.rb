@@ -8,7 +8,10 @@ class BlamesController < ApiController
     this_user = User.find(current_user.id)
     this_user.points_to_give -= blame.points
 
-    if this_user.points_to_give > 0 && blame.save && this_user.save
+    user_being_blamed = User.find(blame.recipient_id)
+    user_being_blamed.points_to_redeem += blame.points
+
+    if this_user.points_to_give > 0 && blame.save && this_user.save && user_being_blamed.save
 
       render json: {
         status: "200 Success!",

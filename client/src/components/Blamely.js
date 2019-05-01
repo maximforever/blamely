@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 
-import Sidebar from './Sidebar'
-import Timeline from './Timeline'
-import Hint from './Hint'
+import Sidebar from "./Sidebar";
+import Timeline from "./Timeline";
+import Hint from "./Hint";
 
-
-import '../stylesheets/blamely.css';
+import "../stylesheets/blamely.css";
 
 class Blamely extends Component {
   constructor(props) {
@@ -24,31 +23,30 @@ class Blamely extends Component {
         y: 0
       }
     };
-
   }
 
   componentDidMount() {
-    fetch('/api/teams/megacorp')
+    fetch("/api/teams/megacorp")
       .then(response => response.json())
-      .then((json) => {
-       
+      .then(json => {
         console.log(json);
         this.setState({
           currentUser: json.current_user,
           users: json.users,
           blames: json.blames
         });
-
       })
       .catch(error => console.log(error));
   }
 
   recordBlame = () => {
-
-    if(this.state.currentBlame == null || !this.state.currentBlame.trim().length){
+    if (
+      this.state.currentBlame == null ||
+      !this.state.currentBlame.trim().length
+    ) {
       this.setState({
         error: "Can't send in a blank message"
-      })
+      });
       return;
     }
 
@@ -60,22 +58,21 @@ class Blamely extends Component {
 
     const data = {
       blame: {
-        recipient_id: recipientId,      
+        recipient_id: recipientId,
         message: this.state.currentBlame.trim(),
-        points: pointCount           
+        points: pointCount
       }
-    }
+    };
 
-    fetch('/api/blames', {
+    fetch("/api/blames", {
       method: "POST",
       body: JSON.stringify(data),
-      headers:{
-        'Content-Type': 'application/json'
+      headers: {
+        "Content-Type": "application/json"
       }
     })
       .then(response => response.json())
-      .then((jsonResponse) => {
-       
+      .then(jsonResponse => {
         console.log(jsonResponse);
 
         // add to state
@@ -84,74 +81,64 @@ class Blamely extends Component {
           blames: jsonResponse.blames,
           currentUser: jsonResponse.user,
           currentBlame: ""
-        })
-
+        });
       })
       .catch(error => {
-        console.log(error)
+        console.log(error);
       });
-    
-  }
+  };
 
-  updateBlame = (event) => {
-
+  updateBlame = event => {
     const blame = event.target.value;
 
     this.setState({
       currentBlame: blame,
       error: ""
-    })
-  }
+    });
+  };
 
-  displayHint = (event) => {
-
+  displayHint = event => {
     let newHintState = {
       display: true,
       x: event.clientX,
       y: event.clientY
-    }
+    };
 
     this.setState({
       hint: newHintState
-    })
+    });
 
     let self = this;
 
-    setTimeout(function(){
-        let newHintState = {
-          display: false,
-          x: 0,
-          y: 0
-        }
+    setTimeout(function() {
+      let newHintState = {
+        display: false,
+        x: 0,
+        y: 0
+      };
 
-        self.setState({
-          hint: newHintState
-        })
-    }, 1000)
-
-  }
+      self.setState({
+        hint: newHintState
+      });
+    }, 1000);
+  };
 
   renderHint = () => {
-
-    return (this.state.hint.display) ? <Hint xPos={this.state.hint.x} yPos={this.state.hint.y} /> : null;
-
-  }
-
-
-
+    return this.state.hint.display ? (
+      <Hint xPos={this.state.hint.x} yPos={this.state.hint.y} />
+    ) : null;
+  };
 
   render() {
-
-    if(this.state.users == null || this.state.blames == null){
-      return null
+    if (this.state.users == null || this.state.blames == null) {
+      return null;
     } else {
-
       let hint = this.renderHint();
 
       return (
         <div id="blamely-wrapper">
           <Sidebar displayHint={this.displayHint} />
-          <Timeline 
+          <Timeline
             currentUser={this.state.currentUser}
             blames={this.state.blames}
             value={this.state.currentBlame}
@@ -163,14 +150,8 @@ class Blamely extends Component {
           />
           {hint}
         </div>
-        
-
-        
-      )
+      );
     }
-
-
-    
   }
 }
 
