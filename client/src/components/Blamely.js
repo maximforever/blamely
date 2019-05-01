@@ -29,7 +29,6 @@ class Blamely extends Component {
     fetch("/api/teams/megacorp")
       .then(response => response.json())
       .then(json => {
-        console.log(json);
         this.setState({
           currentUser: json.current_user,
           users: json.users,
@@ -73,10 +72,6 @@ class Blamely extends Component {
     })
       .then(response => response.json())
       .then(jsonResponse => {
-        console.log(jsonResponse);
-
-        // add to state
-
         this.setState({
           blames: jsonResponse.blames,
           currentUser: jsonResponse.user,
@@ -84,6 +79,7 @@ class Blamely extends Component {
         });
       })
       .catch(error => {
+        // could use React ErrorBoundary
         console.log(error);
       });
   };
