@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import AddBlame from "./AddBlame";
 import BlameCards from "./BlameCards";
 import SlimCards from "./SlimCards";
@@ -9,9 +9,9 @@ const Timeline = ({
   currentUser,
   blames,
   value,
-  onClick,
-  onType,
+  onBlameSubmit,
   error,
+  clearError,
   displayHint,
   team
 }) => {
@@ -31,10 +31,12 @@ const Timeline = ({
           <div className="timeline-column column-left">
             <AddBlame
               currentBlame={value}
-              handleClick={onClick}
-              handleInput={onType}
+              onBlameSubmit={(target, points, text) =>
+                onBlameSubmit(target, points, text)
+              }
               team={team}
               error={error}
+              clearError={clearError}
             />
 
             <BlameCards cards={blames} />

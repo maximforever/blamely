@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import SidebarLink from "./SidebarLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

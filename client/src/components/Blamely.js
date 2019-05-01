@@ -15,7 +15,11 @@ class Blamely extends Component {
       blames: null,
       team: null,
       currentUser: null,
-      currentBlame: "",
+      currentBlame: {
+        target: null,
+        points: 10,
+        text: ""
+      },
       error: null,
       hint: {
         display: false,
@@ -39,9 +43,10 @@ class Blamely extends Component {
   }
 
   recordBlame = () => {
+    console.log(this.state.currentBlame);
     if (
-      this.state.currentBlame == null ||
-      !this.state.currentBlame.trim().length
+      this.state.currentBlame.target == null ||
+      !this.state.currentBlame.text.trim().length
     ) {
       this.setState({
         error: "Can't send in a blank message"
@@ -49,17 +54,11 @@ class Blamely extends Component {
       return;
     }
 
-    // I know this is decidedly -not- a React-like way to get info from the dom
-    // I will refactor as a next step
-
-    let recipientId = document.getElementById("teammate-to-blame").value;
-    let pointCount = document.getElementById("points-to-charge").value;
-
     const data = {
       blame: {
-        recipient_id: recipientId,
-        message: this.state.currentBlame.trim(),
-        points: pointCount
+        recipient_id: this.state.currentBlame.target,
+        message: this.state.currentBlame.text.trim(),
+        points: this.state.currentBlame.points
       }
     };
 
@@ -72,10 +71,16 @@ class Blamely extends Component {
     })
       .then(response => response.json())
       .then(jsonResponse => {
+        let cleanBlame = {
+          points: 10,
+          target: null,
+          text: ""
+        };
+
         this.setState({
           blames: jsonResponse.blames,
           currentUser: jsonResponse.user,
-          currentBlame: ""
+          currentBlame: cleanBlame
         });
       })
       .catch(error => {
@@ -84,13 +89,29 @@ class Blamely extends Component {
       });
   };
 
-  updateBlame = event => {
-    const blame = event.target.value;
-
+  clearError = () => {
     this.setState({
-      currentBlame: blame,
       error: ""
     });
+  };
+
+  submitBlame = (target, points, text) => {
+    let newBlame = {
+      target: target,
+      points: points,
+      text: text
+    };
+
+    this.setState(
+      {
+        currentBlame: newBlame
+      },
+      () => {
+        this.recordBlame();
+      }
+    );
+
+    let self = this;
   };
 
   displayHint = event => {
@@ -138,9 +159,11 @@ class Blamely extends Component {
             currentUser={this.state.currentUser}
             blames={this.state.blames}
             value={this.state.currentBlame}
-            onClick={() => this.recordBlame}
-            onType={this.updateBlame}
+            onBlameSubmit={(target, points, text) =>
+              this.submitBlame(target, points, text)
+            }
             error={this.state.error}
+            clearError={this.clearErr}
             displayHint={this.displayHint}
             team={this.state.users}
           />

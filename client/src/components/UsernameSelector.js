@@ -1,12 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 
 import "../stylesheets/add-blame.css";
 
-const UsernameSelector = ({ team }) => {
-  console.log(team);
-
+const UsernameSelector = ({ onSelect, team }) => {
   return (
-    <select name="teammate" id="teammate-to-blame">
+    <select
+      name="teammate"
+      id="teammate-to-blame"
+      defaultValue="2"
+      onChange={onSelect}
+    >
       {team.map(teammate => (
         <option key={teammate.id} value={teammate.id}>
           {teammate.username}

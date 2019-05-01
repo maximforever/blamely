@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import "../stylesheets/slim-cards.css";
 
@@ -7,7 +7,11 @@ const SlimCards = ({ balance, displayHint }) => {
     <div className="slim-card-wrapper">
       <div className="card slim-card">
         You are <strong>{balance} points</strong> closer to being fired
-        <a href="https://linkedin.com" target="_blank">
+        <a
+          href="https://linkedin.com/in/maxim-pekarsky"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <button className="secondary-button">Browse LinkedIn</button>
         </a>
       </div>

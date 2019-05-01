@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 const Hint = ({ xPos, yPos }) => {
   xPos = xPos - 60 + "px";

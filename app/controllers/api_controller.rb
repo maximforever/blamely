@@ -1,7 +1,7 @@
 class ApiController < ActionController::API
 
     def current_user
-    	User.find_by(name: "Max Pekarsky")
+    	User.find_by(username: "bonusly_developer")
     end
 
     def current_team
